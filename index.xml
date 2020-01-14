@@ -10,5 +10,15 @@
 	<atom:link href="http://xyniath.dev/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>About Me</title>
+      <link>http://xyniath.dev/about-me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://xyniath.dev/about-me/</guid>
+      <description>Hey, I&#39;m Matt!
+I&#39;m an aspiring Ethical hacker</description>
+    </item>
+    
   </channel>
 </rss>
