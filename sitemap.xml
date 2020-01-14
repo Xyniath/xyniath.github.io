@@ -3,19 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://xyniath.dev/about-me/</loc>
+    <loc>https://xyniath.github.io/about-me/</loc>
   </url>
   
   <url>
-    <loc>http://xyniath.dev/categories/</loc>
+    <loc>https://xyniath.github.io/categories/</loc>
   </url>
   
   <url>
-    <loc>http://xyniath.dev/tags/</loc>
+    <loc>https://xyniath.github.io/tags/</loc>
   </url>
   
   <url>
-    <loc>http://xyniath.dev/</loc>
+    <loc>https://xyniath.github.io/</loc>
   </url>
   
 </urlset>
