@@ -10,5 +10,14 @@
 	<atom:link href="https://xyniath.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>info</title>
+      <link>https://xyniath.github.io/tags/info/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/info/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
