@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Easy on Xyniath</title>
+    <link>https://xyniath.github.io/tags/easy/</link>
+    <description>Recent content in Easy on Xyniath</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Tue, 21 Jan 2020 08:23:07 +0000</lastBuildDate>
+    
+	<atom:link href="https://xyniath.github.io/tags/easy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Monteverde</title>
+      <link>https://xyniath.github.io/posts/monteverde/</link>
+      <pubDate>Tue, 21 Jan 2020 08:23:07 +0000</pubDate>
+      
+      <guid>https://xyniath.github.io/posts/monteverde/</guid>
+      <description>Introduction IP: 10.10.10.172
+This is my write-up for the Hack the Box machine Monteverde
+Initial nmap scan Running the inital nmap scan
+nmap -sV -sC -p- -oN nmap 10.10.10.172
+Yielded the following results</description>
+    </item>
+    
+  </channel>
+</rss>
