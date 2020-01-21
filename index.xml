@@ -21,7 +21,9 @@
 This is my write-up for the Hack the Box machine Monteverde
 Initial nmap scan Running the inital nmap scan
 nmap -sV -sC -p- -oN nmap 10.10.10.172
-Yielded the following results</description>
+Yielded the following results
+From here, you can see that there are 18 open ports and that the windows is running on windows
+Ports that stand out Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later</description>
     </item>
     
     <item>
