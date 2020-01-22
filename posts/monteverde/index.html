@@ -5,13 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="">
-<meta name="description" content="Introduction IP: 10.10.10.172
+<meta name="description" content="Introduction IP: 10.10.10.172 Difficulty: Easy
 This is my write-up for the Hack the Box machine Monteverde.
-Initial nmap scan Running the inital nmap scan:
+Initial nmap Scan Running the inital nmap scan:
 nmap -sV -sC -p- -oN nmap 10.10.10.172
 Yielded the following results:
 From here, you can see that there are 18 open ports and that the windows is running on windows.
-Ports that stand out Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later." />
+Ports That Stand Out   Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later." />
 <meta name="keywords" content="homepage, hacking, ctf, htb, hack, box, programming, blog, informatics, osint, ethical" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -40,7 +40,7 @@ Ports that stand out Port 389 - shows that there&#39;s an Active Directory domai
 <meta itemprop="description" content="Write-up for the Monteverde Machine from Hack the Box">
 <meta itemprop="datePublished" content="2020-01-21T08:23:07&#43;00:00" />
 <meta itemprop="dateModified" content="2020-01-21T08:23:07&#43;00:00" />
-<meta itemprop="wordCount" content="1002">
+<meta itemprop="wordCount" content="1004">
 <meta itemprop="image" content="https://xyniath.github.io/"/>
 
 
@@ -128,18 +128,27 @@ Ports that stand out Port 389 - shows that there&#39;s an Active Directory domai
 
             <div class="post-content">
                 <h2 id="introduction">Introduction</h2>
-<p>IP: 10.10.10.172</p>
+<p><strong>IP</strong>: 10.10.10.172
+<strong>Difficulty</strong>: Easy</p>
 <p>This is my write-up for the Hack the Box machine Monteverde.</p>
-<h2 id="initial-nmap-scan">Initial nmap scan</h2>
-<p>Running the inital nmap scan:</p>
+<h2 id="initial-nmap-scan">Initial nmap Scan</h2>
+<p>Running the inital <code>nmap</code> scan:</p>
 <p><code>nmap -sV -sC -p- -oN nmap 10.10.10.172</code></p>
 <p>Yielded the following results:</p>
 <p><img src="/posts/monteverde/nmapscan.png" alt="Nmap Scan"></p>
 <p>From here, you can see that there are 18 open ports and that the windows is running on windows.</p>
-<h3 id="ports-that-stand-out">Ports that stand out</h3>
+<h3 id="ports-that-stand-out">Ports That Stand Out</h3>
+<ul>
+<li>
 <p><strong>Port 389</strong> - shows that there's an Active Directory domain named MEGABANK present on the system which may become useful later.</p>
+</li>
+<li>
 <p><strong>Port 445</strong> - Stands out as its used generally for windows SMB protocol, furthering the significance of this results, we also see host script results on this protocol showing us the smb security mode as 2.02.</p>
+</li>
+<li>
 <p><strong>Port 5985</strong> - Showing a http server, hosting a &ldquo;Document not found&rdquo; page. This port used for Windows Server management.</p>
+</li>
+</ul>
 <h2 id="enumeration-of-smb-protocol">Enumeration of SMB Protocol</h2>
 <p>I decided to start off by enumerating the smb protocol on the machine, I did this by running another nmap scan with <code>-A</code>.</p>
 <p><img src="/posts/monteverde/smbportscan.png" alt="Nmap Scan"></p>
@@ -241,7 +250,7 @@ But didn't come across anything in the folder</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://xyniath.github.io/tags/azure">Azure</a></span><span class="tag"><a href="https://xyniath.github.io/tags/easy">Easy</a></span><span class="tag"><a href="https://xyniath.github.io/tags/hack-the-box">Hack the Box</a></span><span class="tag"><a href="https://xyniath.github.io/tags/write-up">Write-up</a></span><span class="tag"><a href="https://xyniath.github.io/tags/walkthrough">Walkthrough</a></span><span class="tag"><a href="https://xyniath.github.io/tags/smb">SMB</a></span><span class="tag"><a href="https://xyniath.github.io/tags/brute-force">Brute-Force</a></span><span class="tag"><a href="https://xyniath.github.io/tags/powershell">Powershell</a></span><span class="tag"><a href="https://xyniath.github.io/tags/windows">Windows</a></span><span class="tag"><a href="https://xyniath.github.io/tags/enumeration">Enumeration</a></span><span class="tag"><a href="https://xyniath.github.io/tags/real-life">Real-Life</a></span><span class="tag"><a href="https://xyniath.github.io/tags/cve">CVE</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1002 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1004 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-01-21 08:23 &#43;0000</p>
         </div>
@@ -254,6 +263,13 @@ But didn't come across anything in the folder</p>
                 </div>
 
                 <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://xyniath.github.io/posts/openadmin/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Openadmin</span>
+                            </a>
+                        </span>
                     
 
                     

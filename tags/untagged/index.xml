@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>untagged on Xyniath</title>
+    <link>https://xyniath.github.io/tags/untagged/</link>
+    <description>Recent content in untagged on Xyniath</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Tue, 21 Jan 2020 21:08:55 +0000</lastBuildDate>
+    
+	<atom:link href="https://xyniath.github.io/tags/untagged/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Openadmin</title>
+      <link>https://xyniath.github.io/posts/openadmin/</link>
+      <pubDate>Tue, 21 Jan 2020 21:08:55 +0000</pubDate>
+      
+      <guid>https://xyniath.github.io/posts/openadmin/</guid>
+      <description>Introduction IP: 10.10.10.171
+Difficulty: Easy
+Initial nmap Scan Running the initial nmap scan: nmap -sC -sV -oN nmap 10.10.10.171
+Gave me the following:
+From the nmap scan, you can see that there isn&#39;t too much here.
+  The machine is running Ubuntu Linux
+  Port 22 - The ssh protocol, can’t really access this without credentials
+  Port 80 - HTTP port, usually hosts web pages etc. In this case, it&#39;s the Ubuntu Apache web server</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,10 +6,26 @@
     <description>Recent content on Xyniath</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 21 Jan 2020 08:23:07 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jan 2020 21:08:55 +0000</lastBuildDate>
     
 	<atom:link href="https://xyniath.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Openadmin</title>
+      <link>https://xyniath.github.io/posts/openadmin/</link>
+      <pubDate>Tue, 21 Jan 2020 21:08:55 +0000</pubDate>
+      
+      <guid>https://xyniath.github.io/posts/openadmin/</guid>
+      <description>Introduction IP: 10.10.10.171
+Difficulty: Easy
+Initial nmap Scan Running the initial nmap scan: nmap -sC -sV -oN nmap 10.10.10.171
+Gave me the following:
+From the nmap scan, you can see that there isn&#39;t too much here.
+  The machine is running Ubuntu Linux
+  Port 22 - The ssh protocol, can’t really access this without credentials
+  Port 80 - HTTP port, usually hosts web pages etc. In this case, it&#39;s the Ubuntu Apache web server</description>
+    </item>
     
     <item>
       <title>Monteverde</title>
@@ -17,13 +33,13 @@
       <pubDate>Tue, 21 Jan 2020 08:23:07 +0000</pubDate>
       
       <guid>https://xyniath.github.io/posts/monteverde/</guid>
-      <description>Introduction IP: 10.10.10.172
+      <description>Introduction IP: 10.10.10.172 Difficulty: Easy
 This is my write-up for the Hack the Box machine Monteverde.
-Initial nmap scan Running the inital nmap scan:
+Initial nmap Scan Running the inital nmap scan:
 nmap -sV -sC -p- -oN nmap 10.10.10.172
 Yielded the following results:
 From here, you can see that there are 18 open ports and that the windows is running on windows.
-Ports that stand out Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later.</description>
+Ports That Stand Out   Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later.</description>
     </item>
     
     <item>

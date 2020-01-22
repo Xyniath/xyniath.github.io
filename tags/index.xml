@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Xyniath</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 21 Jan 2020 08:23:07 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jan 2020 21:08:55 +0000</lastBuildDate>
     
 	<atom:link href="https://xyniath.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>untagged</title>
+      <link>https://xyniath.github.io/tags/untagged/</link>
+      <pubDate>Tue, 21 Jan 2020 21:08:55 +0000</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/untagged/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Azure</title>
