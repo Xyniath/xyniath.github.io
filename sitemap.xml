@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://xyniath.github.io/posts/cache/</loc>
+    <loc>https://xyniath.github.io/write-ups/cache/</loc>
     <lastmod>2020-06-14T02:26:14+01:00</lastmod>
   </url>
   
@@ -43,11 +43,6 @@
   </url>
   
   <url>
-    <loc>https://xyniath.github.io/posts/</loc>
-    <lastmod>2020-06-14T02:26:14+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://xyniath.github.io/tags/</loc>
     <lastmod>2020-06-14T02:26:14+01:00</lastmod>
   </url>
@@ -63,12 +58,17 @@
   </url>
   
   <url>
+    <loc>https://xyniath.github.io/write-ups/</loc>
+    <lastmod>2020-06-14T02:26:14+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://xyniath.github.io/</loc>
     <lastmod>2020-06-14T02:26:14+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://xyniath.github.io/posts/openadmin/</loc>
+    <loc>https://xyniath.github.io/write-ups/openadmin/</loc>
     <lastmod>2020-01-21T21:08:55+00:00</lastmod>
   </url>
   
@@ -88,7 +88,7 @@
   </url>
   
   <url>
-    <loc>https://xyniath.github.io/posts/monteverde/</loc>
+    <loc>https://xyniath.github.io/write-ups/monteverde/</loc>
     <lastmod>2020-01-21T08:23:07+00:00</lastmod>
   </url>
   
@@ -117,6 +117,14 @@
   </url>
   
   <url>
+    <loc>https://xyniath.github.io/blog/about-me/</loc>
+  </url>
+  
+  <url>
+    <loc>https://xyniath.github.io/blog/</loc>
+  </url>
+  
+  <url>
     <loc>https://xyniath.github.io/categories/</loc>
   </url>
   
@@ -125,7 +133,7 @@
   </url>
   
   <url>
-    <loc>https://xyniath.github.io/posts/welcome/</loc>
+    <loc>https://xyniath.github.io/blog/welcome/</loc>
   </url>
   
 </urlset>

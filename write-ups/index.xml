@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>CVE on Xyniath</title>
-    <link>https://xyniath.github.io/tags/cve/</link>
-    <description>Recent content in CVE on Xyniath</description>
+    <title>Write-ups on Xyniath</title>
+    <link>https://xyniath.github.io/write-ups/</link>
+    <description>Recent content in Write-ups on Xyniath</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Sun, 14 Jun 2020 02:26:14 +0100</lastBuildDate>
     
-	<atom:link href="https://xyniath.github.io/tags/cve/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://xyniath.github.io/write-ups/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -26,6 +26,22 @@ From these results, it shows that there are two ports open
 Port 80 apache web server
 Enumerating the Web Server Navigating to the web server, I am presented with this webpage
 I navigate through the webpage to try find some useful information</description>
+    </item>
+    
+    <item>
+      <title>Openadmin</title>
+      <link>https://xyniath.github.io/write-ups/openadmin/</link>
+      <pubDate>Tue, 21 Jan 2020 21:08:55 +0000</pubDate>
+      
+      <guid>https://xyniath.github.io/write-ups/openadmin/</guid>
+      <description>Introduction IP: 10.10.10.171
+Difficulty: Easy
+Initial nmap Scan Running the initial nmap scan: nmap -sC -sV -oN nmap 10.10.10.171
+Gave me the following:
+From the nmap scan, you can see that there isn&#39;t too much here.
+  The machine is running Ubuntu Linux
+  Port 22 - The ssh protocol, can’t really access this without credentials
+  Port 80 - HTTP port, usually hosts web pages etc. In this case, it&#39;s the Ubuntu Apache web server</description>
     </item>
     
     <item>

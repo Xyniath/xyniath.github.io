@@ -13,10 +13,10 @@
     
     <item>
       <title>Cache</title>
-      <link>https://xyniath.github.io/posts/cache/</link>
+      <link>https://xyniath.github.io/write-ups/cache/</link>
       <pubDate>Sun, 14 Jun 2020 02:26:14 +0100</pubDate>
       
-      <guid>https://xyniath.github.io/posts/cache/</guid>
+      <guid>https://xyniath.github.io/write-ups/cache/</guid>
       <description>Introduction IP: 10.10.10.172 Difficulty: Easy
 This is my write-up for the Hack the Box machine Cache.
 Initial nmap Scan Running the inital nmap scan:
@@ -30,10 +30,10 @@ I navigate through the webpage to try find some useful information</description>
     
     <item>
       <title>Openadmin</title>
-      <link>https://xyniath.github.io/posts/openadmin/</link>
+      <link>https://xyniath.github.io/write-ups/openadmin/</link>
       <pubDate>Tue, 21 Jan 2020 21:08:55 +0000</pubDate>
       
-      <guid>https://xyniath.github.io/posts/openadmin/</guid>
+      <guid>https://xyniath.github.io/write-ups/openadmin/</guid>
       <description>Introduction IP: 10.10.10.171
 Difficulty: Easy
 Initial nmap Scan Running the initial nmap scan: nmap -sC -sV -oN nmap 10.10.10.171
@@ -46,10 +46,10 @@ From the nmap scan, you can see that there isn&#39;t too much here.
     
     <item>
       <title>Monteverde</title>
-      <link>https://xyniath.github.io/posts/monteverde/</link>
+      <link>https://xyniath.github.io/write-ups/monteverde/</link>
       <pubDate>Tue, 21 Jan 2020 08:23:07 +0000</pubDate>
       
-      <guid>https://xyniath.github.io/posts/monteverde/</guid>
+      <guid>https://xyniath.github.io/write-ups/monteverde/</guid>
       <description>Introduction IP: 10.10.10.172 Difficulty: Easy
 This is my write-up for the Hack the Box machine Monteverde.
 Initial nmap Scan Running the inital nmap scan:
@@ -74,11 +74,25 @@ There are a few websites that I primarily use:
     </item>
     
     <item>
-      <title>Welcome</title>
-      <link>https://xyniath.github.io/posts/welcome/</link>
+      <title>About Me</title>
+      <link>https://xyniath.github.io/blog/about-me/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://xyniath.github.io/posts/welcome/</guid>
+      <guid>https://xyniath.github.io/blog/about-me/</guid>
+      <description>Hello!
+I&#39;m Matt, an aspiring ethical hacker. I love cyber security and engaging with CTFs and Bounty Hunting
+I am currently studying Computer Science at the University of Lincoln in the UK
+The purpose of this blog is to demonstrate my understanding, and methodology of Hacking, more specifically tailored towards web and software hacking.
+There are a few websites that I primarily use:
+1.) HackTheBox - A website dedicated to CTFs and the practice of penetration testing</description>
+    </item>
+    
+    <item>
+      <title>Welcome</title>
+      <link>https://xyniath.github.io/blog/welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xyniath.github.io/blog/welcome/</guid>
       <description>Welcome to my blog!
 This is where I&#39;ll be posting my CTF write-ups, hobby material &amp;amp; other things.
 Feel free to contact me on twitter @xyniath</description>
