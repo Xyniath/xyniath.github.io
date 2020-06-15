@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on Xyniath</title>
-    <link>https://xyniath.github.io/tags/linux/</link>
-    <description>Recent content in Linux on Xyniath</description>
+    <title>Metasploit on Xyniath</title>
+    <link>https://xyniath.github.io/tags/metasploit/</link>
+    <description>Recent content in Metasploit on Xyniath</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Mon, 15 Jun 2020 15:03:28 +0100</lastBuildDate>
     
-	<atom:link href="https://xyniath.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://xyniath.github.io/tags/metasploit/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,23 +23,6 @@ Nmap scan Running nmap -sC -sV -p- -oN nmap 10.10.10.191 gave me the following&a
 from here there are only 2 ports that are displayed, ftp is closed and port 80 is open
 It appears the web server is the only way in!
 Enumerating Webserver We are greeted with some sort of CMS website. I check the links available to me.</description>
-    </item>
-    
-    <item>
-      <title>Cache</title>
-      <link>https://xyniath.github.io/write-ups/cache/</link>
-      <pubDate>Sun, 14 Jun 2020 02:26:14 +0100</pubDate>
-      
-      <guid>https://xyniath.github.io/write-ups/cache/</guid>
-      <description>Introduction IP: 10.10.10.172 Difficulty: Easy
-This is my write-up for the Hack the Box machine Cache.
-Initial nmap Scan Running the inital nmap scan:
-nmap -sV -sC -p- -oN nmap 10.10.10.188
-Yielded the following results:
-From these results, it shows that there are two ports open
-Port 80 apache web server
-Enumerating the Web Server Navigating to the web server, I am presented with this webpage
-I navigate through the webpage to try find some useful information</description>
     </item>
     
   </channel>

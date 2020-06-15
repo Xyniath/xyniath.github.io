@@ -6,17 +6,80 @@
     <description>Recent content in Tags on Xyniath</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 14 Jun 2020 02:26:14 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2020 15:03:28 +0100</lastBuildDate>
     
 	<atom:link href="https://xyniath.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Blunder</title>
+      <link>https://xyniath.github.io/tags/blunder/</link>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/blunder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CMS</title>
+      <link>https://xyniath.github.io/tags/cms/</link>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/cms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>CVE</title>
       <link>https://xyniath.github.io/tags/cve/</link>
-      <pubDate>Sun, 14 Jun 2020 02:26:14 +0100</pubDate>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
       
       <guid>https://xyniath.github.io/tags/cve/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Easy</title>
+      <link>https://xyniath.github.io/tags/easy/</link>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/easy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Enumeration</title>
+      <link>https://xyniath.github.io/tags/enumeration/</link>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/enumeration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hack the Box</title>
+      <link>https://xyniath.github.io/tags/hack-the-box/</link>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/hack-the-box/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://xyniath.github.io/tags/linux/</link>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Metasploit</title>
+      <link>https://xyniath.github.io/tags/metasploit/</link>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
+      
+      <guid>https://xyniath.github.io/tags/metasploit/</guid>
       <description></description>
     </item>
     
@@ -30,47 +93,11 @@
     </item>
     
     <item>
-      <title>Easy</title>
-      <link>https://xyniath.github.io/tags/easy/</link>
-      <pubDate>Sun, 14 Jun 2020 02:26:14 +0100</pubDate>
-      
-      <guid>https://xyniath.github.io/tags/easy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Enumeration</title>
-      <link>https://xyniath.github.io/tags/enumeration/</link>
-      <pubDate>Sun, 14 Jun 2020 02:26:14 +0100</pubDate>
-      
-      <guid>https://xyniath.github.io/tags/enumeration/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hack the Box</title>
-      <link>https://xyniath.github.io/tags/hack-the-box/</link>
-      <pubDate>Sun, 14 Jun 2020 02:26:14 +0100</pubDate>
-      
-      <guid>https://xyniath.github.io/tags/hack-the-box/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Hosts</title>
       <link>https://xyniath.github.io/tags/hosts/</link>
       <pubDate>Sun, 14 Jun 2020 02:26:14 +0100</pubDate>
       
       <guid>https://xyniath.github.io/tags/hosts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://xyniath.github.io/tags/linux/</link>
-      <pubDate>Sun, 14 Jun 2020 02:26:14 +0100</pubDate>
-      
-      <guid>https://xyniath.github.io/tags/linux/</guid>
       <description></description>
     </item>
     

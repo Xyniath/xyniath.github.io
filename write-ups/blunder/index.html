@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Introduction IP: 10.10.10.191 Difficulty: Easy
+This is my write-up for the Hack the Box machine Blunder
+Nmap scan Running nmap -sC -sV -p- -oN nmap 10.10.10.191 gave me the following&amp;hellip;
+from here there are only 2 ports that are displayed, ftp is closed and port 80 is open
+It appears the web server is the only way in!
+Enumerating Webserver We are greeted with some sort of CMS website. I check the links available to me." />
+<meta name="keywords" content="homepage, hacking, ctf, htb, hack, box, programming, blog, informatics, osint, ethical" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://xyniath.github.io/write-ups/blunder/" />
+
+
+    <title>
+        
+            Blunder :: Xyniath  — Hacking and stuff
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.5dcefbf8102eb536dd3e2de53ffebfa58599ab2435c241a0db81728a5e015f2e.css">
+
+
+
+
+<meta itemprop="name" content="Blunder">
+<meta itemprop="description" content="Write-up for hack the box machine blunder">
+<meta itemprop="datePublished" content="2020-06-15T15:03:28&#43;01:00" />
+<meta itemprop="dateModified" content="2020-06-15T15:03:28&#43;01:00" />
+<meta itemprop="wordCount" content="626">
+<meta itemprop="image" content="https://xyniath.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="Hack the Box,Easy,Blunder,CMS,CVE,Enumeration,Metasploit,Linux," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://xyniath.github.io/"/>
+
+<meta name="twitter:title" content="Blunder"/>
+<meta name="twitter:description" content="Write-up for hack the box machine blunder"/>
+
+
+
+
+
+    <meta property="article:published_time" content="2020-06-15 15:03:28 &#43;0100 BST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/home/xyniath</span>
+            <span class="logo__cursor" style=""></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://xyniath.github.io/about-me/">About Me</a></li><li><a href="https://xyniath.github.io/blog/">Blog</a></li><li><a href="https://xyniath.github.io/write-ups/">Write-Ups</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://xyniath.github.io/write-ups/blunder/">Blunder</a></h2>
+
+            
+
+            <div class="post-content">
+                <h2 id="introduction">Introduction</h2>
+<p><strong>IP</strong>: 10.10.10.191
+<strong>Difficulty</strong>: Easy</p>
+<p>This is my write-up for the Hack the Box machine Blunder</p>
+<h2 id="nmap-scan">Nmap scan</h2>
+<p>Running <code>nmap -sC -sV -p- -oN nmap 10.10.10.191</code> gave me the following&hellip;</p>
+<p><img src="/posts/blunder/nmap.png" alt="Nmap Scan"></p>
+<p>from here there are only 2 ports that are displayed, ftp is closed and port 80 is open</p>
+<p>It appears the web server is the only way in!</p>
+<h2 id="enumerating-webserver">Enumerating Webserver</h2>
+<p><img src="/posts/blunder/website.png" alt="Webpage"></p>
+<p>We are greeted with some sort of CMS website. I check the links available to me.</p>
+<p>In the background, I run a fuzz attack</p>
+<p><code>wfuzz -c -w /root/htb/seclists/Discovery/Web-Content/common.txt --hc 404,403 -u 10.10.10.191/FUZZ.txt</code>
+**
+<strong>NB- I am using the wordlists provided by github user danielmiessler</strong> <a href="https://github.com/danielmiessler/SecLists"><strong>HERE</strong></a>
+<img src="/posts/blunder/fuzz.png" alt="Fuzz"></p>
+<p>From the fuzz attack it seems like theres a todo.txt so going to this url, displays the text file.
+<img src="/posts/blunder/todo.png" alt="todo.txt">
+This shows us:</p>
+<ul>
+<li>It is a Content Management System</li>
+<li>FTP was turned off</li>
+<li>fergus is a potential user (no capital letters?)</li>
+</ul>
+<p>I had to find some sort of login portal for a user to manage this content, so I try basic directories:</p>
+<ul>
+<li>/login/</li>
+<li>/admin/</li>
+</ul>
+<p>The /admin/ directory brought me to a login page!</p>
+<p><img src="/posts/blunder/login.png" alt="Login"></p>
+<p>The CMS used is Bludit, so I do a quick page source inspection to see if i can find a version number which I could not. So I search google for an exploit for Bludit.</p>
+<p>A metasploit module for a php image upload appears but I still need credentials to log in so that this image can be uploaded.</p>
+<p>Sadly I did not have a password. From previous CTF experience I was told to read the blog posts closely to see if there were any misfitting words, etc.</p>
+<p>In the Stephen King post, a name was typed as &lsquo;FirstNameLastName&rsquo; - &ldquo;RolandDeschain&rdquo;, this could've been a typo but the rest of the site seemed well written.</p>
+<p>So using this as a password for fergus, we get in!</p>
+<p><strong>USERNAME</strong> - fergus</p>
+<p><strong>PASSWORD</strong> - RolandDeschain</p>
+<p><img src="/posts/blunder/loggedin.png" alt="Logged In"></p>
+<h2 id="exploiting-bludit">Exploiting BLUDIT</h2>
+<p>After gaining access, I load up the metasploit module and enter the options and exploit!
+<img src="/posts/blunder/search.png" alt="Metasploit Search"></p>
+<p><img src="/posts/blunder/module.png" alt="Metasploit Module Options"></p>
+<p><img src="/posts/blunder/uid.png" alt="getuid"></p>
+<h2 id="getting-usertxt">Getting user.txt</h2>
+<p>Whilst navigating the system, in the bludit/databases/ directory, there is a users.php which contains the hashed password with salt. I couldnt crack the admin hash so I decide to look deeper.</p>
+<p>As I traverse out of the bludit directory, I see that there's a newer (and currently unused version of bludit), so I navigate to the users.php file and see a new user
+called hugo with hash
+```faca404fd5c0a31cf1897b823c695c85cffeb98d``
+I could not crack this hash with john and rockyou.txt so I go to <a href="https://crackstation.net/">crackstation</a> and enter the hash and I get a password back of:
+<strong>Password120</strong></p>
+<p><img src="/posts/blunder/crackedhash.png" alt="Cracked Hash"></p>
+<p>I can now drop into a shell and try switching user!</p>
+<p>But first I must spawna  TTY shell to make use of most terminal commands as currently its limited.</p>
+<p>So I run <code>which python</code> to see if python is installed</p>
+<p><img src="/posts/blunder/shell.png" alt="Shell"></p>
+<p>It is, so I can now spawn a TTY Shell with a python one-liner <code>python -c &quot;import pty;pty.spawn('/bin/bash')&quot;</code></p>
+<p><img src="/posts/blunder/ttyshell.png" alt="TTY Shell"></p>
+<p>I can now su to hugo</p>
+<p><img src="/posts/blunder/hugo.png" alt="Switch User"></p>
+<p>This now gives me access to get user.txt!</p>
+<h2 id="gaining-roottxt">Gaining root.txt</h2>
+<p>Now that I am user, I decide to run <code>id</code> to see if i have any special priveliges</p>
+<p><img src="/posts/blunder/id.png" alt="id"></p>
+<p>It seems like I do not, but I run <code>find / -perm 1001 2&gt;/dev/null</code> just to make sure, and no results are returned:
+<img src="/posts/blunder/find.png" alt="find"></p>
+<p>My next plan is to upload <code>linpeas.sh</code> from my machine to the target machine and run it.</p>
+<p>Whilst looking through the results of linpeas.sh I see this&hellip;
+<img src="/posts/blunder/sudo-l.png" alt="sudo -l"></p>
+<p><em>(looking through and experimenting with other results from linpeas took me a long time, and this was almost a last resort!)</em></p>
+<p>And surprisingly I got something!</p>
+<p><img src="/posts/blunder/sudo-lresult.png" alt="sudo -l result"></p>
+<p>Using google to see what <code>(ALL, !root) /bin/bash</code> means, I find an exploit linked <a href="https://www.exploit-db.com/exploits/47502"><strong>HERE</strong></a></p>
+<p>Downloading the python script, I run it on the machine (using python3)</p>
+<p><img src="/posts/blunder/givemeroot.png" alt="root"></p>
+<p>I now have root, and can get root.txt!</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://xyniath.github.io/tags/hack-the-box">Hack the Box</a></span><span class="tag"><a href="https://xyniath.github.io/tags/easy">Easy</a></span><span class="tag"><a href="https://xyniath.github.io/tags/blunder">Blunder</a></span><span class="tag"><a href="https://xyniath.github.io/tags/cms">CMS</a></span><span class="tag"><a href="https://xyniath.github.io/tags/cve">CVE</a></span><span class="tag"><a href="https://xyniath.github.io/tags/enumeration">Enumeration</a></span><span class="tag"><a href="https://xyniath.github.io/tags/metasploit">Metasploit</a></span><span class="tag"><a href="https://xyniath.github.io/tags/linux">Linux</a></span>
+  				</p>
+  			</div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.2">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>

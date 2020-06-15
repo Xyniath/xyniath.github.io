@@ -6,10 +6,24 @@
     <description>Recent content in Enumeration on Xyniath</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 14 Jun 2020 02:26:14 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2020 15:03:28 +0100</lastBuildDate>
     
 	<atom:link href="https://xyniath.github.io/tags/enumeration/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Blunder</title>
+      <link>https://xyniath.github.io/write-ups/blunder/</link>
+      <pubDate>Mon, 15 Jun 2020 15:03:28 +0100</pubDate>
+      
+      <guid>https://xyniath.github.io/write-ups/blunder/</guid>
+      <description>Introduction IP: 10.10.10.191 Difficulty: Easy
+This is my write-up for the Hack the Box machine Blunder
+Nmap scan Running nmap -sC -sV -p- -oN nmap 10.10.10.191 gave me the following&amp;hellip;
+from here there are only 2 ports that are displayed, ftp is closed and port 80 is open
+It appears the web server is the only way in!
+Enumerating Webserver We are greeted with some sort of CMS website. I check the links available to me.</description>
+    </item>
     
     <item>
       <title>Cache</title>
